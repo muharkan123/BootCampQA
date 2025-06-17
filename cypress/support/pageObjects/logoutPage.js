@@ -21,14 +21,21 @@ class logoutPage {
     cy.url().should("include", "dashboard");
   }
 
-  logoutProfileDropdown() { 
-    cy.xpath("/html/body/div[1]/div[1]/div[1]/header/div[1]/div[3]/ul/li/span/p").click(); 
-    cy.xpath("/html/body/div[1]/div[1]/div[1]/header/div[1]/div[3]/ul/li/ul/li[4]/a").contains("Logout").click();
+  logoutProfileDropdown() {
+    cy.get("span.oxd-userdropdown-tab").should("be.visible").click();
+    
+    // // Pilih opsi logout
+    cy.wait(2000);
+    cy.contains("Logout").click();
+    cy.wait(2000);
+        // // Verifikasi user diarahkan kembali ke halaman login
+    cy.url().should("include", "/auth/login");
+    cy.get('input[placeholder="Username"]').should("be.visible");
   }
 
-  verifyPositiveLogoutCase () {
-    cy.xpath("/html/body/div[1]/div[1]/div/div[1]/div/div[2]/div[2]/div/div/p[1]").should("be.visible").and("contain.text", "Username : Admin");
-  }
+  // verifyPositiveLogoutCase () {
+  //   cy.xpath("/html/body/div[1]/div[1]/div/div[1]/div/div[2]/div[2]/div/div/p[1]").should('have.text', 'Username')
+  // }
 }
 
 export default new logoutPage();

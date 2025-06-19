@@ -1,4 +1,4 @@
-class logoutPage {
+class logoutPageDay17 {
   visit() {
     cy.visit("/auth/login");
   }
@@ -13,6 +13,7 @@ class logoutPage {
     cy.xpath('//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[2]/div/div[2]/input').clear().type(passwrd).should("have.value", passwrd);
   }
 
+  
   buttonPress() {
     cy.xpath("/html/body/div/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button").click();
   }
@@ -23,15 +24,15 @@ class logoutPage {
 
   logoutProfileDropdown() {
     cy.get("span.oxd-userdropdown-tab").should("be.visible").click();
-    
+
     // // Pilih opsi logout
     cy.wait(2000);
     cy.contains("Logout").click();
     cy.wait(2000);
-        // // Verifikasi user diarahkan kembali ke halaman login
+    // // Verifikasi user diarahkan kembali ke halaman login
     cy.url().should("include", "/auth/login");
     cy.get('input[placeholder="Username"]').should("be.visible");
   }
 }
 
-export default new logoutPage();
+export default new logoutPageDay17();
